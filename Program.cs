@@ -16,7 +16,7 @@ namespace iTextSharpSample
                 var writer = PdfWriter.GetInstance(document, fs);
 
                 // Add meta information to the document
-                document.AddAuthor("Micke Blomquist");
+                document.AddAuthor("Satoru Fujimori");
                 document.AddCreator("Sample application using iTestSharp");
                 document.AddKeywords("PDF tutorial education");
                 document.AddSubject("Document subject - Describing the steps creating a PDF document");
