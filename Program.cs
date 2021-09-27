@@ -11,6 +11,9 @@ namespace iTextSharpSample
         {
             try
             {
+                // StreamUtil.AddToResourceSearch(System.Reflection.Assembly.Load("iTextAsian"));
+                // StreamUtil.AddToResourceSearch(System.Reflection.Assembly.Load("iTextAsianCmaps"));
+
                 using var fs = new FileStream(@".\sample.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
                 var document = new Document(PageSize.A4, 25, 25, 30, 30);
                 var writer = PdfWriter.GetInstance(document, fs);
@@ -25,11 +28,26 @@ namespace iTextSharpSample
                 // Open the document to enable you to write to the document
                 document.Open();
 
-                // Add a simple and wellknown phrase to the document
-                for (int x = 0; x != 100; x++)
-                {
-                    document.Add(new Paragraph("Paragraph - Hello World!"));
-                }
+                //［1］ MSゴシック
+                Font fnt1 = new Font(BaseFont.CreateFont
+                    (@"c:\windows\fonts\msgothic.ttc,0", BaseFont.IDENTITY_H, true), 40);
+                document.Add(new Paragraph($"こんにちは！！ MS ゴシック", fnt1));
+
+                Font fnt2 = new Font(BaseFont.CreateFont
+                    (@"c:\windows\fonts\msmincho.ttc,0", BaseFont.IDENTITY_H, true), 40);
+                document.Add(new Paragraph($"こんにちは！！ MS 明朝", fnt2));
+
+                //［4］ CJK明朝
+                // Font fnt4 = new Font(BaseFont.CreateFont
+                //     ("HiraMinProN-W6", BaseFont.IDENTITY_H, true), 20);
+
+                // Font fnt4 = new Font(BaseFont.CreateFont
+                //     (@"C:\Users\sator\AppData\Local\Microsoft\Windows\Fonts\ヒラギノ明朝 ProN W6.otf", BaseFont.IDENTITY_H, true), 20);
+
+                // NG !!!
+                Font fnt4 = new Font(BaseFont.CreateFont
+                (@"C:\Users\sator\AppData\Local\Microsoft\Windows\Fonts\ヒラギノ明朝 ProN W6.otf", BaseFont.IDENTITY_H, true), 40);
+                document.Add(new Paragraph($"こんにちは！！ ヒラギノ明朝 ProN W6", fnt4));
 
                 // Close the document
                 document.Close();
@@ -38,7 +56,7 @@ namespace iTextSharpSample
 
                 Console.WriteLine("Document saved to the pdf folder.");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"error msg={ex.Message}");
             }
