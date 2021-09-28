@@ -37,16 +37,12 @@ namespace iTextSharpSample
                     (@"c:\windows\fonts\msmincho.ttc,0", BaseFont.IDENTITY_H, true), 40);
                 document.Add(new Paragraph($"こんにちは！！ MS 明朝", fnt2));
 
-                //［4］ CJK明朝
-                // Font fnt4 = new Font(BaseFont.CreateFont
-                //     ("HiraMinProN-W6", BaseFont.IDENTITY_H, true), 20);
-
-                // Font fnt4 = new Font(BaseFont.CreateFont
-                //     (@"C:\Users\sator\AppData\Local\Microsoft\Windows\Fonts\ヒラギノ明朝 ProN W6.otf", BaseFont.IDENTITY_H, true), 20);
-
-                // NG !!!
-                Font fnt4 = new Font(BaseFont.CreateFont
-                (@"C:\Users\sator\AppData\Local\Microsoft\Windows\Fonts\ヒラギノ明朝 ProN W6.otf", BaseFont.IDENTITY_H, true), 40);
+                // Subset=false で OK
+                var baseFont = BaseFont.CreateFont
+                (@"C:\Users\sator\AppData\Local\Microsoft\Windows\Fonts\ヒラギノ明朝 ProN W6.otf", BaseFont.IDENTITY_H,
+                    true);
+                baseFont.Subset = false;
+                Font fnt4 = new Font(baseFont, 40);
                 document.Add(new Paragraph($"こんにちは！！ ヒラギノ明朝 ProN W6", fnt4));
 
                 // Close the document
